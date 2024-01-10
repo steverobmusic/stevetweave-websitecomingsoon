@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteveTheWeave - Website Coming Soon!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #logo {
+            max-width: 40%;
+            height: auto;
+            cursor: move;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            user-drag: none; /* Disable image dragging in some browsers */
+        }
+        #title {
+            font-size: 36px;
+            cursor: pointer;
+        }
+        #coming-soon-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        #disclaimer {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        #footer {
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        #red-banner {
+            background-color: #ff4040;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="red-banner">
+        Due to technical glitches, the website has been rescheduled for launch at January 10th @ 4:00 PM EST.
+    </div>
+
+    <img src="https://steverob.sirv.com/SteveTheWeave-Logo" alt="SteveTheWeave Logo" id="logo" oncontextmenu="return false;">
+
+    <h1 id="title" onclick="changeLanguage()">SteveTheWeave - Website Coming Soon!</h1>
+
+    <p id="coming-soon-text">It'll be released and published on January 10th at 4:00 PM EST!</p>
+
+    <div id="disclaimer">Click on the title to change the languages!</div>
+
+    <div id="footer">
+        &copy; 2023 SteveTheWeave. All rights reserved. Powered by Steve Rob Communications.
+    </div>
+
+    <script>
+        // Make logo moveable and interactive
+        const logo = document.getElementById("logo");
+        let offsetX, offsetY, isDragging = false;
+
+        logo.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - logo.getBoundingClientRect().left;
+            offsetY = e.clientY - logo.getBoundingClientRect().top;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                logo.style.left = e.clientX - offsetX + "px";
+                logo.style.top = e.clientY - offsetY + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
+
+        // Language change function
+        let currentLanguageIndex = 0;
+        const languages = ["en", "fr", "es"];
+
+        function changeLanguage() {
+            const title = document.getElementById("title");
+            const comingSoonText = document.getElementById("coming-soon-text");
+            const disclaimer = document.getElementById("disclaimer");
+
+            currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
+            const currentLanguage = languages[currentLanguageIndex];
+
+            switch (currentLanguage) {
+                case "en":
+                    title.textContent = "SteveTheWeave - Website Coming Soon!";
+                    comingSoonText.textContent = "It'll be released and published on January 10th at 4:00 PM EST!";
+                    disclaimer.textContent = "Click on the title to change the languages!";
+                    break;
+                case "fr":
+                    title.textContent = "SteveTheWeave - Site Bientôt Disponible!";
+                    comingSoonText.textContent = "Il sera publié et publié le 10 janvier à 16h00 HNE!";
+                    disclaimer.textContent = "Cliquez sur le titre pour changer de langue !";
+                    break;
+                case "es":
+                    title.textContent = "SteveTheWeave - Website Próximamente!";
+                    comingSoonText.textContent = "¡Se lanzará y publicará el 10 de enero a las 16:00 HNE!";
+                    disclaimer.textContent = "¡Haga clic en el título para cambiar los idiomas!";
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
