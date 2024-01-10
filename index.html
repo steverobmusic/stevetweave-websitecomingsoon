@@ -50,6 +50,10 @@
             margin-bottom: 20px;
             text-align: center;
         }
+        #countdown {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +68,8 @@
 
     <p id="coming-soon-text">It'll be released and published on January 10th at 4:00 PM EST!</p>
 
+    <div id="countdown"></div>
+
     <div id="disclaimer">Click on the title to change the languages!</div>
 
     <div id="footer">
@@ -71,6 +77,29 @@
     </div>
 
     <script>
+        // Countdown script
+        const releaseDate = new Date('2024-01-10T16:00:00Z').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();  // Initial call to display the countdown
+
         // Make logo moveable and interactive
         const logo = document.getElementById("logo");
         let offsetX, offsetY, isDragging = false;
